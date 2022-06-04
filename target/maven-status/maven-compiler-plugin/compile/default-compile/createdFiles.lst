@@ -1,0 +1,8 @@
+com/example/teste/entity/Users.class
+com/example/teste/services/UsersService.class
+com/example/teste/controllers/UsersController.class
+com/example/teste/ServletInitializer.class
+com/example/teste/DTO/UsersDTO.class
+com/example/teste/controllers/TesteController.class
+com/example/teste/TesteApplication.class
+com/example/teste/repositories/UserRepository.class
