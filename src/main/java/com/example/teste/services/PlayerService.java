@@ -42,7 +42,7 @@ public class PlayerService {
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public Player atualizar(String nome, PlayerDTO dto) {
+	public PlayerDTO atualizar(String nome, PlayerDTO dto) {
 		Player player = repository.findByNome(nome);
 		
 		player.setCamisa(dto.getCamisa());
@@ -53,7 +53,7 @@ public class PlayerService {
 		player.setTermino_contrato(dto.getTermino_contrato());
 		player.setVinculo(dto.getVinculo());
 		
-		return repository.save(player);
+		return mapper.map(repository.save(player), PlayerDTO.class);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)

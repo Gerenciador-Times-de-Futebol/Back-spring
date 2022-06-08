@@ -46,9 +46,9 @@ public class PlayerController {
 	}
 	
 	@PutMapping(value="/{nome}")
-	public ResponseEntity<Player> atualizar(@PathVariable String nome,
+	public ResponseEntity<PlayerDTO> atualizar(@PathVariable String nome,
 			@RequestBody PlayerDTO dto) {
-		Player player = service.atualizar(nome, dto);
+		PlayerDTO player = service.atualizar(nome, dto);
 		return ResponseEntity.ok(player);
 	}
 	

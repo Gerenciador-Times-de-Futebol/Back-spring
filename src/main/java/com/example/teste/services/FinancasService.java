@@ -42,7 +42,7 @@ public class FinancasService {
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public Financas atualizar(String nome, FinancasDTO dto) {
+	public FinancasDTO atualizar(String nome, FinancasDTO dto) {
 		Financas financas = repository.findByNome(nome);
 		
 		financas.setNome(dto.getNome());
@@ -50,7 +50,7 @@ public class FinancasService {
 		financas.setTipo(dto.getTipo());
 		financas.setValor(dto.getValor());
 		
-		return repository.save(financas);
+		return mapper.map(repository.save(financas), FinancasDTO.class);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)

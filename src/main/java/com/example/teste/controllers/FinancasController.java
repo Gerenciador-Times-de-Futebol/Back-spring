@@ -47,9 +47,9 @@ public class FinancasController {
 	}
 	
 	@PutMapping(value="/{nome}")
-	public ResponseEntity<Financas> atualizar(@PathVariable String nome,
+	public ResponseEntity<FinancasDTO> atualizar(@PathVariable String nome,
 			@RequestBody FinancasDTO dto) {
-		Financas financas = service.atualizar(nome, dto);
+		FinancasDTO financas = service.atualizar(nome, dto);
 		return ResponseEntity.ok(financas);
 	}
 	
