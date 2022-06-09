@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.teste.DTO.CompromissoDTO;
 import com.example.teste.entity.Compromisso;
@@ -51,6 +53,7 @@ public class CompromissoService {
     return Optional.of(mapper.map(repository.save(compromisso.get()), CompromissoDTO.class));
   }
 
+  @Transactional(propagation=Propagation.REQUIRED, readOnly=false)
   public void excluir(String uuid) {
     repository.deleteByUuid(UUID.fromString(uuid));
   }
