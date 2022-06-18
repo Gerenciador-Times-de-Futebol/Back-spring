@@ -1,5 +1,7 @@
 package com.example.teste;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.example.teste.filters.AuthorizationFilter;
 import com.example.teste.filters.LoginFilter;
@@ -38,6 +43,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.addFilterBefore(new LoginFilter("/login",authenticationManager()),	UsernamePasswordAuthenticationFilter.class)
 		.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
+	
+	CorsConfigurationSource corsConfigurationSource() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowedOrigins(Arrays.asList("*"));
+		config.setAllowedMethods(Arrays.asList("*"));
+		config.setAllowedHeaders(Arrays.asList("*"));
+		config.setAllowCredentials(true);
+		config.applyPermitDefaultValues();
+		source.registerCorsConfiguration("/**", config);
+		return source;
 	}
 
 }
