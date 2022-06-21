@@ -32,6 +32,17 @@ public class UsersService {
         return modelMapper.map(userRepository.save(user), UsersDTO.class);
 
     }
+    
+    @Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public UsersDTO atualizar(String email, UsersDTO dto) {
+		Users user = userRepository.findByEmail(email);
+		
+		user.setEmail(dto.getEmail());
+		user.setNome(dto.getNome());
+		user.setUuid(dto.getUuid());
+		
+		return modelMapper.map(userRepository.save(user), UsersDTO.class);
+	}
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void deleteByEmail(UsersDTO users) {
